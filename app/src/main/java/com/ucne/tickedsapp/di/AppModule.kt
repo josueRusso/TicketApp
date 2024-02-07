@@ -26,7 +26,7 @@ object  AppModule{
     @Singleton
     @Provides
     fun provideVerboApi(moshi: Moshi): TicketApi {
-        val Base_Url = "https://sag-api-dev.azurewebsites.net/swagger/index.html"
+        val Base_Url = "https://sag-api-dev.azurewebsites.net/api/"
         return Retrofit.Builder()
             .baseUrl(Base_Url)
             .addConverterFactory(MoshiConverterFactory.create(moshi))

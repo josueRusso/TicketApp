@@ -1,12 +1,12 @@
 package com.ucne.tickedsapp.data.dto
 
 data class TicketDto(
-    val idTicket: Int,
+    val idTicket: Int = 0,
+    val fecha: String,
+    val vence: String,
     val idCliente: Int,
-    val idSistema: Int,
-    val idTipo: Int,
-    val prioridad: Int,
-    val solicitadopPor: String,
+    val empresa: String,
+    val solicitadoPor: String,
     val asunto: String,
-    val especificaciones: String,
+    val prioridad: Int,
 )
