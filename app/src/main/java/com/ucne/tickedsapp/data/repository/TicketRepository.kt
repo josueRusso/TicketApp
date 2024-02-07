@@ -15,11 +15,12 @@ class TicketRepository @Inject constructor(
     private val ticket : TicketApi
 ) {
     //lista de ticket
-    suspend fun getTickets(): List<TicketDto> {
+    fun getListTickts(): Flow<Resources<List<TicketDto>>> = flow {
         try {
-            return ticket.GetList()
-        } catch (e: Exception) {
-            throw e
+            emit(Resources.Loading())
+            emit(Resources.Success(ticket.GetList()))
+        } catch (e: IOException) {
+            emit(Resources.Error(e.message ?: "verificar tu conexion a internet"))
         }
     }
 

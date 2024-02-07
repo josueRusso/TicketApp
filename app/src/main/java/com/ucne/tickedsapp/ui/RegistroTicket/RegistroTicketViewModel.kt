@@ -48,6 +48,7 @@ class TicketViewModel @Inject constructor(
             } else {
                 ticketsRepository.postTicket(
                     TicketDto(
+                        idTicket = 0,
                         fecha = LocalDate.now().toString(),
                         vence = LocalDate.now().toString(),
                         idCliente = ticketsUiState.value.ticket.idCliente,

@@ -1,8 +1,6 @@
 package com.ucne.tickedsapp.ui.RegistroTicket
 
 import android.annotation.SuppressLint
-import android.util.Log
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,12 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -28,7 +23,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,7 +43,7 @@ import com.ucne.tickedsapp.ui.theme.TickedsAppTheme
 fun RegistroTicketScreen(
     //ticketId: Int,
     //onPressCancel: () -> Unit,
-    //viewModel: TicketViewModel = hiltViewModel()
+    viewModel: TicketViewModel = hiltViewModel()
 ) {
 
     Base()
@@ -81,11 +75,13 @@ private fun Base() {
 }
 @Composable
 private fun RegistroTicket() {
-    var nombre by remember { mutableStateOf("") }
-    var telefono by remember { mutableStateOf("") }
-    var celular by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var Fecha by remember { mutableStateOf("") }
+    var ticket : TicketDto
+
+    var idTicket by remember { mutableStateOf("") }
+    var fecha by remember { mutableStateOf("") }
+    var vence by remember { mutableStateOf("") }
+    var idCliente by remember { mutableStateOf("") }
+    var empresa by remember { mutableStateOf("") }
     var solicitadoPor by remember { mutableStateOf("") }
     var asunto by remember { mutableStateOf("") }
     var prioridad by remember { mutableStateOf("") }
@@ -110,8 +106,8 @@ private fun RegistroTicket() {
             )
 
             OutlinedTextField(
-                value = nombre,
-                onValueChange = { nombre = it },
+                value = idTicket,
+                onValueChange = { idTicket = it },
                 label = { Text(text = "Ticket Id") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -119,8 +115,8 @@ private fun RegistroTicket() {
             )
 
             OutlinedTextField(
-                value = telefono,
-                onValueChange = { telefono = it },
+                value = fecha,
+                onValueChange = { fecha = it },
                 label = { Text(text = "Fecha") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -128,8 +124,8 @@ private fun RegistroTicket() {
             )
 
             OutlinedTextField(
-                value = celular,
-                onValueChange = { celular = it },
+                value = vence,
+                onValueChange = { vence = it },
                 label = { Text(text = "Vence") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -137,8 +133,8 @@ private fun RegistroTicket() {
             )
 
             OutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
+                value = idCliente,
+                onValueChange = { idCliente = it },
                 label = { Text(text = "Cliente Id") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -146,8 +142,8 @@ private fun RegistroTicket() {
             )
 
             OutlinedTextField(
-                value = Fecha,
-                onValueChange = { Fecha = it },
+                value = empresa,
+                onValueChange = { empresa = it },
                 label = { Text(text = "Empresa") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -240,6 +236,8 @@ private fun RegistroTicket() {
 
                     }
                 }
+
+                ticket = TicketDto(idTicket.toInt(),fecha,vence,idCliente.toInt(),empresa,solicitadoPor,asunto,prioridad.toInt())
             }
         }
     }

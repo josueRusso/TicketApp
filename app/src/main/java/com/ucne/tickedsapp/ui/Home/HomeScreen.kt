@@ -51,14 +51,14 @@ import com.ucne.tickedsapp.ui.theme.TickedsAppTheme
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = hiltViewModel(),
+    //viewModel: HomeViewModel = hiltViewModel(),
     registroNavigation: () -> Unit,
     onClickSeleccionado: (Int) -> Unit
 ) {
     TickedsAppTheme{
 
-        val uiState by viewModel.uiState.collectAsState()
-        Base(uiState.ticket, registroNavigation)
+       // val uiState by viewModel.uiState.collectAsState()
+        Base(/*uiState.ticket,*/ registroNavigation)
     }
 }
 
@@ -66,7 +66,7 @@ fun HomeScreen(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun Base(ticketDto: List<TicketDto>, registroNavigation: () -> Unit) {
+private fun Base(/*ticketDto: List<TicketDto>,*/ registroNavigation: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(

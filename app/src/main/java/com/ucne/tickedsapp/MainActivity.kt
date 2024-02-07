@@ -14,6 +14,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.ucne.tickedsapp.data.dto.TicketDto
 import com.ucne.tickedsapp.ui.Home.HomeScreen
@@ -32,7 +33,10 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
+
                 ) {
+                    val navController = rememberNavController()
+                    Menu(navController = navController)
 
                 }
             }
@@ -50,7 +54,7 @@ private fun Menu(navController: NavHostController) {
         composable(Screen.Home.route) {
             HomeScreen(
                 registroNavigation = { navController.navigate(Screen.RegistroTicket.route) }
-            ) {
+            ){
                 navController.navigate(Screen.SeleccionTicket.route + "/$it")
             }
         }
